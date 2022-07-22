@@ -16,7 +16,7 @@ const Adminlayout = ({children}) => {
 <div className=' mx-10 grid grid-cols-12 gap-16'>
  
 {/* ----sidebar--- */}                                     
-<div  className=' col-span-3'>
+<div  className='phone:hidden laptop:block  laptop:col-span-3'>
 
     <Sidebar />
 </div>
@@ -24,7 +24,7 @@ const Adminlayout = ({children}) => {
 
 {/* ---content children--- */}
 
-<div className=' col-span-9'>
+<div className='phone:col-span-12  laptop:col-span-9'>
 
  {children}
 

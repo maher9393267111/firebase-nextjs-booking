@@ -24,7 +24,7 @@ const CreateProducts = () => {
   const [productinfo, setProductinfo] = useState("");
   const [productname, setProductname] = useState("");
   const [productprice, setProductprice] = useState("");
-  const [productTitle, setProductTitle] = useState("Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat placeat similique dicta nulla praesentium deserunt. Corporis repellendus deleniti dolores eligendi.");
+  const [desc, setDesc] = useState("Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat placeat similique dicta nulla praesentium deserunt. Corporis repellendus deleniti dolores eligendi.");
   const [productBrand, setProductBrand] = useState("");
 
   const [productimagesurl, setproductimagesurl] = useState("");
@@ -75,7 +75,7 @@ const {userinfo} = useAuth();
     // generate a random string
    
 
-    const testRef = ref(storage, `rooms/${userinfo?.name}/${file.name}`);
+    const testRef = ref(storage, `rooms/${file.name}`);
 
     await uploadBytes(testRef, file).then((snapshot) => {
       console.log("Uploaded image to storage success!");
@@ -85,7 +85,7 @@ const {userinfo} = useAuth();
     const down = await getDownloadURL(testRef);
     //setproductimage(down);
 
-    setImages([...images, { image: down, color:imageColor }]);
+    setImages([...images, { image: down, name: file.name }]);
  
   
   }
@@ -97,10 +97,11 @@ const {userinfo} = useAuth();
     e.preventDefault();
 
     const product = {
+      name : location + 'Hotel',
       location: location,
       price: productprice,
       images: images,
-      title: productTitle,
+      desc: desc,
        category: selectedcategory,
        guests: guests,
          internet: internet,
