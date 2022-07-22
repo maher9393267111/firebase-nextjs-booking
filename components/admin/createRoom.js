@@ -130,13 +130,6 @@ setImages([]);
       );
         //  reset all the state
 
-
-
-
-
-  
-
-
     
     }
   

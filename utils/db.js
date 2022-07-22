@@ -38,23 +38,30 @@ import { message } from "antd";
 
 export const updateRoom = async (roomId, data) => {
   // delete room old images  from storage
-
+console.log("roomId",roomId);
   if (data.images.length > 0) {
     data.images.forEach(async (image) => {
-      
+      console.log("imageMAps", image?.name);
     //  deleteObject(ref(storage, image.)),
-    deleteObject(ref(storage, 'rooms/' +   image?.name));
+    deleteObject(ref(storage, 'rooms/' + image?.name)).then(() => {
+      message.success("Room images deleted successfully");
+    }).catch((err) => {
+      message.error(err.message);
+    })
 
 
 
     });
   }
 
-  await updateDoc(doc(db, "products", roomId), data)
+
+
+    await   updateDoc(doc(db, "rooms", roomId ), data) 
     .then(() => {
       message.success("Room Updated Successfully");
     })
     .catch((error) => {
       message.error(error.message);
-    });
+    })
+   
 };

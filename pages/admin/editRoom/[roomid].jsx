@@ -8,19 +8,19 @@ import {  doc } from "firebase/firestore";
  const Uproom  = () => {
 const router = useRouter()
 const {roomid} = router.query
-console.log(roomid)
+//console.log(roomid)
 
 const [room] = useDocumentData( roomid !== undefined ?   doc(db, "rooms", roomid) : null);
 
-console.log('room ',room)
+//console.log('room ',room)
 
 
     return (
         <Layout>
 
-{room?.name}
 
-           <UpdateForm/> 
+
+           <UpdateForm roomid={roomid} room={room}/> 
             
 
         </Layout>
