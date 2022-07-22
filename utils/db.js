@@ -36,14 +36,14 @@ import { message } from "antd";
 
 // update Room
 
-export const updateRoom = async (roomId, data) => {
+export const updateRoom = async (roomId, data,room) => {
   // delete room old images  from storage
 console.log("roomId",roomId);
-  if (data.images.length > 0) {
-    data.images.forEach(async (image) => {
+  if (room.images.length > 0) {
+    room.images.forEach(async (image) => {
       console.log("imageMAps", image?.name);
     //  deleteObject(ref(storage, image.)),
-    deleteObject(ref(storage, 'rooms/' + image?.name)).then(() => {
+  await  deleteObject(ref(storage, 'rooms/' + image?.name)).then(() => {
       message.success("Room images deleted successfully");
     }).catch((err) => {
       message.error(err.message);
@@ -55,8 +55,8 @@ console.log("roomId",roomId);
   }
 
 
-
-    await   updateDoc(doc(db, "rooms", roomId ), data) 
+console.log("data🛩🛩🛩🛩🛩🛩🛩🛩🛩🛩🛩🛩🛩🛩🛩",data);
+    await   updateDoc(doc(db, "rooms", `${roomId}` ), data) 
     .then(() => {
       message.success("Room Updated Successfully");
     })

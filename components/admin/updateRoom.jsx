@@ -1,6 +1,6 @@
 import React from 'react';
 import {useEffect ,useState} from 'react'
-
+import {message} from 'antd'
 import {
     getDownloadURL,
     ref,
@@ -40,6 +40,7 @@ const handleimages = async (e) => {
   
       await uploadBytes(testRef, file).then((snapshot) => {
         console.log("Uploaded image to storage success!");
+        message.success("Uploaded image to storage success!");
       });
   
       // get image url from storage and set into state
@@ -55,11 +56,14 @@ const handleimages = async (e) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+    console.log('📍📍📍📍',images);
+
+  if   (images?.length > 0  ) { 
+
         const data = {
-          name : location + 'Hotel',
+          name : name,
           location: location,
-          price:room?.price,
+          price:room?.price || 2000,
           images: images,
           desc: room?.desc,
            category: Category,
@@ -76,9 +80,10 @@ const handleimages = async (e) => {
         };
     
     
-       
-        await updateRoom(roomid, data);
+       console.log('📍📍📍📍',data);
+        await updateRoom(roomid, data,room);
     
+    }
         
         }
       
@@ -92,7 +97,7 @@ const handleimages = async (e) => {
 
     return (
         <div className='w-full mb-12'>
-
+{room?.price}
 {/* <input placeholder={room?.name} onChange={(e) => setName(e.target.value)}  type="text" /> */}
 
 <div className=' flex gap-12 mb-12 '>

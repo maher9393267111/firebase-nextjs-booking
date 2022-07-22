@@ -25,7 +25,7 @@ const SingletabRoom = ({room}) => {
   </Box>
   <Spacer  />
   <Box p='2' >
-    <Link href={`/admin/editRoom/${room?.id,room}`}>
+    <Link href={`/admin/editRoom/${room?.id}`}>
     <ArrowUpDownIcon cursor={ 'pointer'} boxSize={6} />
     </Link>
   </Box>

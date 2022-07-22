@@ -12,12 +12,12 @@ const {roomid} = router.query
 
 const [room] = useDocumentData( roomid !== undefined ?   doc(db, "rooms", roomid) : null);
 
-//console.log('room ',room)
+console.log('room ',room)
 
 
     return (
-        <Layout>
-
+        <Layout>as
+{room?.price}
 
 
            <UpdateForm roomid={roomid} room={room}/> 
