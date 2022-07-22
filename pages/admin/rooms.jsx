@@ -1,11 +1,19 @@
 import React from 'react';
 import Adminlayout from '../../components/admin/Adminlayout';
-const Room = () => {
+import AllRoms from '../../components/admin/AllRoms';
+const Rooms = () => {
     return (
         <Adminlayout>
-        <h1>Rooms</h1>
+        <h1 className=' font-bold text-2xl'>All Rooms</h1>
+
+
+        <div>
+            <AllRoms />
+        </div>
+
+
     </Adminlayout>
     );
 }
 
-export default Room;
+export default Rooms;

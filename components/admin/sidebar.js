@@ -22,6 +22,14 @@ className={ `${pathname === '/admin/dashboard' ? 'text-blue-400' : ''} cursor-po
 >Create Room</p></Link></li>
 
 
+<li className={ ` my-6`}> <Link
+ 
+href='/admin/rooms'><p
+className={ `${pathname === '/admin/rooms' ? 'text-blue-400' : ''} cursor-pointer my-6`}
+> All Rooms</p></Link></li>
+
+
+
 <li className='my-6'><Link href='/admin/orders'>
 <p
 className={ `${pathname === '/admin/orders' ? 'text-blue-400' : ''} cursor-pointer my-6`}
