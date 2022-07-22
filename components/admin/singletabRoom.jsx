@@ -5,6 +5,7 @@ import {TableContainer,Tab, Tbody, Tr, Th, Td, Thead, Tfoot, Table, TableCaption
     } from '@chakra-ui/react';
     import {CloseIcon,DeleteIcon,ArrowUpDownIcon} from '@chakra-ui/icons'
     import Link from 'next/link';
+    import { deleteRoom} from '../../utils/db'
 const SingletabRoom = ({room}) => {
     return (
         
@@ -17,11 +18,14 @@ const SingletabRoom = ({room}) => {
         <Flex width={'70%'}>
   <Box p='2' >
     
-    <DeleteIcon cursor={ 'pointer'} boxSize={6} />
+    <DeleteIcon
+    onClick={() => { deleteRoom(room?.id,room)}}
+    
+    cursor={ 'pointer'} boxSize={6} />
   </Box>
   <Spacer  />
   <Box p='2' >
-    <Link href={`/admin/editRoom/${room?.id}`}>
+    <Link href={`/admin/editRoom/${room?.id,room}`}>
     <ArrowUpDownIcon cursor={ 'pointer'} boxSize={6} />
     </Link>
   </Box>

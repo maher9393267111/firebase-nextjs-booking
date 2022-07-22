@@ -65,3 +65,38 @@ console.log("roomId",roomId);
     })
    
 };
+
+
+
+// Delete Room
+
+export const deleteRoom = async (roomId,room) => {
+
+console.log("roomId",roomId,room)
+
+// delete room old images  from storage
+  //const room = await getDoc(doc(db, "rooms", roomId));
+  if (room?.images?.length > 0) {
+
+
+
+    room.images.forEach(async (image) => {
+console.log("imageMAps", image?.name);
+      console.log("imageMAps", image?.name);
+    //  deleteObject(ref(storage, image.)),
+    deleteObject(ref(storage, 'rooms/' + image?.name)).then(() => {
+      deleteDoc(doc(db, "rooms", roomId)).then(() => {
+        message.success("Room deleted successfully");}).catch((err) => {
+          message.error(err.message);
+        })
+      message.success("Room images deleted successfully");
+    }).catch((err) => {
+      message.error(err.message);
+    })
+  }
+  );
+}
+
+
+
+}

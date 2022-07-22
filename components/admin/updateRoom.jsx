@@ -47,7 +47,7 @@ const handleimages = async (e) => {
       //setproductimage(down);
   
       setImages([...images, { image: down, name: file.name }]);
-   
+   console.log('📍📍📍📍',images);
     
     }
 
