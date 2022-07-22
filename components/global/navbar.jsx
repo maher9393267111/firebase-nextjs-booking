@@ -12,6 +12,8 @@ import {
     MenuGroup,
     MenuOptionGroup,
     MenuDivider,
+    WrapItem,
+    ButtonGroup 
   } from '@chakra-ui/react'
 import {ChevronDownIcon} from '@chakra-ui/icons';
 
@@ -36,12 +38,12 @@ const Navbar = () => {
 {/* ---flex  image and auth itytem--- */}
 
 
-<div className=' flex justify-between my-8'>
+<div className=' flex justify-between my-8 mx-12'>
 
 {/* -----left------ */}
 
-<div>
-    <img className=' w-24 h-24 rounded-full object-cover' src="https://thumbs.dreamstime.com/z/simple-illustration-dark-blue-hotel-logo-design-template-business-icon-inspiration-travel-tourism-sticker-idea-simple-165633303.jpg" alt="" />
+<div className=' relative -top-12'>
+    <img className=' w-28 h-28 rounded-full border-2 border-black object-cover' src="https://us.123rf.com/450wm/sitiardi21/sitiardi211701/sitiardi21170100013/70276178-hotel-reflection-logo.jpg" alt="" />
 </div>
 
 
@@ -59,19 +61,36 @@ const Navbar = () => {
     {userinfo.name}
   </MenuButton>
   <MenuList>
-    <MenuItem>
+    <MenuItem
+      fontWeight={'bold'}
+    >
     
     <Link href={ `/profile/${userinfo?.name}`}>
         Profile
         </Link>
     
     </MenuItem>
-    <MenuItem>
+    <MenuItem
+    fontSize={'md'}
+    fontWeight={'bold'}
+    >
     <Link href={ `/booking/${userinfo?.name}`}>
         Booking
         </Link>
     </MenuItem>
-    <MenuItem>Share</MenuItem>
+    <MenuItem>
+    
+    <div>
+    <WrapItem
+      fontWeight={'bold'}
+    >
+      <Button colorScheme='red'>Logout</Button>
+    </WrapItem>
+   
+
+    </div>
+    
+    </MenuItem>
   </MenuList>
 </Menu>
 </div>
@@ -81,7 +100,14 @@ const Navbar = () => {
 :
 (
     <div>
-<h1>login</h1>
+<div>
+
+<ButtonGroup gap='4'>
+      <Button colorScheme='blue'>Register</Button>
+      <Button colorScheme='blue'>Login</Button>
+    </ButtonGroup>
+
+</div>
     </div>
 )
 
