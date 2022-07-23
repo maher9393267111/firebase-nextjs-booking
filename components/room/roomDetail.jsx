@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../context";
 import { message } from "antd";
 import moment from 'moment';
-import { dateAvaliability, makeBooking } from "../../utils/db";
+import { dateAvaliability, makeBooking ,checkBookedDatesOfRoom  } from "../../utils/db";
 const RoomDetail = ({ room,roomId }) => {
   const { userinfo } = useAuth();
   const [checkInDate, setCheckInDate] = useState();
@@ -70,6 +70,20 @@ const RoomDetail = ({ room,roomId }) => {
         message.error(err.message);
       });
   };
+
+
+    useEffect(() => {
+        checkBookedDatesOfRoom(roomId).then((res) => {
+          
+            console.log("resIN details :::: ", res);
+        })
+
+    }, [roomId]);
+
+
+
+
+
 
   return (
     <div className=" mx-24 mt-14 pb-24">

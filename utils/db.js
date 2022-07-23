@@ -312,3 +312,28 @@ export const makeBooking = async (data) => {
   return booking;
 
 }
+
+
+export const checkBookedDatesOfRoom = async (roomId) => {
+
+// find booking with room id
+const bookings = await getDocs( collection(db, "bookings") , where("roomid", "==", roomId) );
+
+const roomArr = []
+  bookings.forEach((doc) => {
+    // doc.data() is never undefined for query doc snapshots
+  //  console.log(doc.id, " => ", doc.data());
+    roomArr.push({ id: doc.id, ...doc.data() });
+  });
+
+  return roomArr;
+
+
+
+//console.log("bookings",bookings);
+
+
+
+
+
+}
