@@ -14,6 +14,7 @@ const RoomDetail = ({ room,roomId }) => {
   const [daysOfStay, setDaysOfStay] = useState();
   const [paymentLoading, setPaymentLoading] = useState(false);
   const [avaliable, setAvaliable] = useState(false);
+  const [execludes, setExecludedDates] = useState([]);
 
   const onChange = (dates) => {
     const [checkInDate, checkOutDate] = dates;
@@ -75,7 +76,9 @@ const RoomDetail = ({ room,roomId }) => {
     useEffect(() => {
         checkBookedDatesOfRoom(roomId).then((res) => {
           
-            console.log("resIN details :::: ", res);
+            console.log("resIN-----> details :::: ", res);
+            console.log(new Date())
+            setExecludedDates(res);
         })
 
     }, [roomId]);
@@ -266,6 +269,7 @@ const RoomDetail = ({ room,roomId }) => {
                         />
                       )}
                     </span>{" "}
+                    {execludes?.length}
                     Condetioned{" "}
                   </li>
 
@@ -312,9 +316,9 @@ const RoomDetail = ({ room,roomId }) => {
                 startDate={checkInDate}
                 endDate={checkOutDate}
                 minDate={new Date()}
-               // maxDate={new Date() +2}
+               
 maxDate = {moment().add(22, "days").toDate()}
-                // excludeDates={excludedDates}
+             excludeDates = { execludes }
                 selectsRange
                 inline
               />

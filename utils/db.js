@@ -34,6 +34,11 @@ import {
 import { toast } from "react-toastify";
 import { message } from "antd";
 import moment from 'moment';
+
+import { extendMoment } from 'moment-range';
+
+const Moment = extendMoment(moment)
+
 // update Room
 
 export const updateRoom = async (roomId, data,room) => {
@@ -326,7 +331,44 @@ const roomArr = []
     roomArr.push({ id: doc.id, ...doc.data() });
   });
 
-  return roomArr;
+
+  let bookedDates = [];
+
+  const timeDiffernece = Moment().utcOffset() / 60;
+
+  
+
+  roomArr.forEach((booking) => {
+
+bookedDates.push(booking.checkInDate);
+bookedDates.push(booking.checkOutDate);
+
+//var checkIN = moment(, 'YYYY/MM/DD');
+
+
+
+  })
+
+  
+
+  //console.log("ExecludesDates---->",bookedDates);
+
+  const ExecludesDates = bookedDates.map((date) => {
+    //return moment(date.seconds*1000).format('YYYY/MM/DD'); normal date gosterir yerar month day 
+
+   // return moment(date.seconds*1000).utcOffset(timeDiffernece).format('YYYY/MM/DD');   // utc offset ile gosterir
+   return new Date(date.seconds*1000);
+  })
+
+console.log("ExecludesDates---->",ExecludesDates);
+
+  return ExecludesDates;
+
+
+
+
+
+
 
 
 

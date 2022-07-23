@@ -1,0 +1,10 @@
+  bookings.forEach(booking => {
+
+        const checkInDate = moment(booking.checkInDate).add(timeDiffernece, 'hours')
+        const checkOutDate = moment(booking.checkOutDate).add(timeDiffernece, 'hours')
+
+        const range = moment.range(moment(checkInDate), moment(checkOutDate));
+
+        const dates = Array.from(range.by('day'));
+        bookedDates = bookedDates.concat(dates);
+    })
