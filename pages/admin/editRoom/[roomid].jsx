@@ -16,8 +16,8 @@ console.log('room ',room)
 
 
     return (
-        <Layout>as
-{room?.price}
+        <Layout>
+
 
 
            <UpdateForm roomid={roomid} room={room}/> 
