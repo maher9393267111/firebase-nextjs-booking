@@ -264,41 +264,24 @@ const roomArr = []
 
   console.log("filterBookings",filterBookings);
 
-  return filterBookings;
+if (filterBookings.length > 0  ) {
+  console.log("LENGTH > 0",filterBookings.length);
+  return false
+}
+
+
+  if ( filterBookings.length === 0){
+    console.log("LENGTH === 0",filterBookings.length);
+    return true
+  }
 
 
 
-  //return roomArr;
+  //return filterBookings;
 
 
 
-
-
-//   onSnapshot(
-//     query(
-//       collection(db, "bookings") ,
-//       where("roomid", "==",`${roomId}` ) ,
-//       where("checkInDate", "<", checkin) ,
-//   where("checkOutDate", ">", checkout) ,
-//       // orderBy("id", "desc")
-//       // ,
-//       // limit(3),
-//       // startAt(startat)
-//     ),
-//     ((snapshot) => {
-
-//       const productsArr = snapshot.docs.map((doc) => ({
-//         id: doc.id,
-//         ...doc.data(),
-//       }));
-// console.log("productsArr",productsArr);
-//       return productsArr;
-
-
-//     })
-
-
-//   )
+  
 
 
 

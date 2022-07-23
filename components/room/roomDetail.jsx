@@ -32,11 +32,12 @@ const RoomDetail = ({ room,roomId }) => {
       console.log("days of stay -----< ", days);
 
       dateAvaliability(roomId, checkInDate.toISOString(), checkOutDate.toISOString()).then((res) => {
-        console.log("res :::: ", res);
+        console.log("resIN details :::: ", res);
         setAvaliable(res);
+        console.log('avaliable in details :::: ',avaliable)
       });
 
-      //  dispatch(checkBooking(id, checkInDate.toISOString(), checkOutDate.toISOString()))
+   
     }
   };
 
@@ -298,12 +299,20 @@ const RoomDetail = ({ room,roomId }) => {
                 endDate={checkOutDate}
                 minDate={new Date()}
                // maxDate={new Date() +2}
-maxDate = {moment().add(4, "days").toDate()}
+maxDate = {moment().add(22, "days").toDate()}
                 // excludeDates={excludedDates}
                 selectsRange
                 inline
               />
             </div>
+
+
+<div>
+
+<h1>{avaliable ? 'This Date is avaliable' : 'This Date Is Not Avaliable'}</h1>
+
+</div>
+
 
             {/* --totla price-- */}
 
