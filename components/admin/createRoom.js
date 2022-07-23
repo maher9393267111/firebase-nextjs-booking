@@ -111,7 +111,7 @@ const {userinfo} = useAuth();
             cleaning: cleaning,
             beds: beds,
             createdAt:Date.now(),
-        //    reviews: [],
+            reviews: [],
 
     };
 
@@ -144,30 +144,6 @@ setImages([]);
 
 
 
-  const updateproduct= async (e) => {
-    e.preventDefault();
-
-    const product = {
-      name: 'maher update',
-    
-    };
-
-
-
-    await updateDoc(doc(db, "products", 'mAQUarQSsvFMmqOz34sR'), {
-      username: 'maher',
-      title: 'maher update'
-  }).then(() => {
-      console.log("Document successfully updated!");
-  }
-  ).catch(error => {
-
-      console.log("Error updating document: ", error);
-  }
-  );
-
-
-  }
 
 
 

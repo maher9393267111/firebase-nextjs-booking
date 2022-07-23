@@ -100,3 +100,50 @@ console.log("imageMAps", image?.name);
 
 
 }
+
+
+// rooms by category and location and guests
+
+
+export const RoomsFilter = async (
+  category,
+  location,
+  guests
+) => {
+
+  const rooms = await getDocs( collection(db, "rooms") , where("category", "==", category) , 
+  //where("location", "==", location) ,
+   where("guests", "==", guests) );
+
+
+
+
+const roomArr = []
+  rooms.forEach((doc) => {
+    // doc.data() is never undefined for query doc snapshots
+    console.log(doc.id, " => ", doc.data());
+    roomArr.push({ id: doc.id, ...doc.data() });
+  });
+
+ 
+
+  
+  const regex = new RegExp(location, "i");
+
+
+
+
+  const filterRooms= roomArr.filter((room) => {
+    return room.location.match(regex);
+  });
+
+
+
+console.log("filterRooms  🛢️ 🛢️ 🛢️ 🛢️ 🛢️ 🛢️ ",filterRooms);
+
+  return filterRooms;
+}
+  
+ 
+
+
