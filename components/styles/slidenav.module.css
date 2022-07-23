@@ -1,0 +1,35 @@
+.slider_custom{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.slide_custom {
+    width: 60%;
+    aspect-ratio: 1/1;
+}
+.button_custom{
+    background-color: rgba(58, 170, 53, 0.5);
+    z-index: 1;
+    
+}
+
+
+.button_customleft{
+  
+  
+    
+    background-color: rgba(58, 170, 53, 0.5);
+    z-index: 1;
+    
+}
+
+
+ @media (max-width: 768px) {
+    .button_customleft {
+        left:-12px;
+    
+       
+    }
+
+}

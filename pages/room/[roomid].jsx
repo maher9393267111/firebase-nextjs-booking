@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { db } from '../../firebase';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
 import {  doc } from "firebase/firestore";
-
+import { Moment } from 'moment';
 
 
 const Roomid = () => {
@@ -16,15 +16,15 @@ const Roomid = () => {
     
     const [room] = useDocumentData( roomid !== undefined ?   doc(db, "rooms", roomid) : null);
     
-    console.log('room :::: ',room)
+    //console.log('room :::: ',room)
 
 
     return (
      <Layout>
-        {room?.name}
+        
         
 <div>
-    <RoomDetail/>
+    <RoomDetail room={room} roomId={roomid} />
 </div>
 
 

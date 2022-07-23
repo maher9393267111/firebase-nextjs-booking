@@ -33,7 +33,7 @@ import {
 } from "react-firebase-hooks/firestore";
 import { toast } from "react-toastify";
 import { message } from "antd";
-
+import moment from 'moment';
 // update Room
 
 export const updateRoom = async (roomId, data,room) => {
@@ -168,3 +168,164 @@ const roomArr = []
   return roomArr;
 }
   
+
+
+
+// date avaliability check in booking collection
+
+export const dateAvaliability2 = async (checkin,checkout, roomId) => {
+
+
+  checkin = new Date(checkin);
+   checkout = new Date(checkout);
+  const rooms = await getDocs( collection(db, "bookings") , 
+  //where("checkin", "<=", checkout) ,
+  //where("checkout", ">=", checkin) ,
+  where("roomid", "==", '1212'
+  //roomId
+  ) 
+  
+
+   );
+
+   let isavaliable = []
+    rooms.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      console.log(doc.id, " => ", doc.data());
+      isavaliable.push({ id: doc.id, ...doc.data() });
+    } 
+    );
+
+    if(isavaliable?.length > 0){
+    //  console.log("isavaliable",isavaliable);
+      return false
+    }
+
+    return true
+
+
+
+
+}
+
+
+
+export const dateAvaliability = async ( roomId,checkin,checkout) => {
+
+
+
+ var checkIN = moment(checkin, 'YYYY/MM/DD');
+
+ var checkinAfter = checkIN.format('D');
+console.log(" CHECKIN AFTER____>",checkinAfter);
+
+ 
+var checkOut = moment(checkout, 'YYYY/MM/DD');
+
+var checkOutAfter = checkOut.format('D');
+console.log(" CHECKOUT AFTER____>",checkOutAfter);
+
+
+
+ const bookings = await getDocs( collection(db, "bookings")  )
+
+
+
+
+const roomArr = []
+  bookings.forEach((doc) => {
+    // doc.data() is never undefined for query doc snapshots
+  //  console.log(doc.id, " => ", doc.data());
+    roomArr.push({ id: doc.id, ...doc.data() });
+  });
+
+ // filter bookings by roomId and checkin and checkout
+
+  const filterBookings = roomArr.filter((booking) => {
+  
+
+
+    var checkinbooking = moment(new Date(booking.checkInDate.seconds*1000), 'YYYY/MM/DD');
+    var checkinbookingAfter = checkinbooking.format('D');
+    console.log("chekinBooking After",checkinbookingAfter);
+
+
+    var checkoutbooking = moment(new Date(booking.checkOutDate.seconds*1000), 'YYYY/MM/DD');
+    var checkinbookoutgAfter = checkoutbooking.format('D');
+    console.log("chekinBooking After",checkinbookoutgAfter);
+
+
+
+   // console.log("bookingIN",booking.checkInDate, checkin,'-----',);
+    return booking.roomid === roomId 
+  && checkinbookingAfter <= checkOutAfter
+  && checkinbookoutgAfter >= checkinAfter
+  })
+
+  console.log("filterBookings",filterBookings);
+
+  return filterBookings;
+
+
+
+  //return roomArr;
+
+
+
+
+
+//   onSnapshot(
+//     query(
+//       collection(db, "bookings") ,
+//       where("roomid", "==",`${roomId}` ) ,
+//       where("checkInDate", "<", checkin) ,
+//   where("checkOutDate", ">", checkout) ,
+//       // orderBy("id", "desc")
+//       // ,
+//       // limit(3),
+//       // startAt(startat)
+//     ),
+//     ((snapshot) => {
+
+//       const productsArr = snapshot.docs.map((doc) => ({
+//         id: doc.id,
+//         ...doc.data(),
+//       }));
+// console.log("productsArr",productsArr);
+//       return productsArr;
+
+
+//     })
+
+
+//   )
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// make booking
+
+export const makeBooking = async (data) => {
+//console.log("data🛩🛩🛩🛩🛩🛩🛩🛩🛩🛩🛩🛩🛩🛩🛩",data);
+
+  const booking = await addDoc(collection(db, "bookings"), data);
+
+  return booking;
+
+}
