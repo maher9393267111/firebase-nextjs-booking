@@ -5,6 +5,7 @@ import Layout from '../components/global/Layout'
 import {RoomsFilter,ALLRooms} from '../utils/db'
 import {useState, useEffect} from 'react'
 import {useRouter} from 'next/router'
+import AllRoomsComp  from '../components/home/AllRooms'
 export default function Home() {
 
 const router = useRouter()
@@ -54,21 +55,20 @@ else {
      <div>
 
 
-ROOOMS--------- {rooms?.length > 0 ? rooms.map((room) => {
+ {rooms?.length > 0 ? 
 
-return (
 
+(
 <div>
-<h1>{room.name}</h1>
-</div>
 
-)}) : <h1>No Rooms</h1>}
+  <AllRoomsComp rooms={rooms}/>
 
-{/* <div>
-  <button type='submit'
-  onClick={searchfilter}
-  >seacrch</button>
-</div> */}
+</div>)
+:
+
+ (<h1 >No Rooms</h1> )}
+
+
 
 
 

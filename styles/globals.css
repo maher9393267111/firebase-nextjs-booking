@@ -1,11 +1,10 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
 html,
 body {
-  overflow-x:  hidden;
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
@@ -21,12 +20,71 @@ a {
   box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
+
+.react-typewriter-text-wrap{
+
+padding-top:66px;
+margin:auto;
+width:300px;
+
+
+}
+
+.react-typewriter-text{
+
+  font-weight:bold
+}
+
+
+.App {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100vw;
+}
+
+.user {
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: #b3e3ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 500px;
+  height: 300px;
+  margin: 20px;
+}
+
+.paginationBttns {
+  width: 80%;
+  height: 40px;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+.paginationBttns a {
+  padding: 10px;
+  margin: 8px;
+  border-radius: 5px;
+  border: 1px solid #3e8ed0;
+  color: #3e8ed0;
+  cursor: pointer;
+}
+
+.paginationBttns a:hover {
+  color: white;
+  background-color: #3e8ed0;
+}
+
+.paginationActive a {
+  color: white;
+  background-color:#3e8ed0;
+}
+
+.paginationDisabled a {
+  color: grey;
+  background-color: grey;
 }
