@@ -10,7 +10,7 @@ import moment from 'moment';
 import getStripe from '../../getStripe';
 import { dateAvaliability, makeBooking ,checkBookedDatesOfRoom  } from "../../utils/db";
 const RoomDetail = ({ room,roomId }) => {
-  const { userinfo } = useAuth();
+  const { userinfo,setSessioniDate,sessioniDate } = useAuth();
   const [checkInDate, setCheckInDate] = useState();
   const [checkOutDate, setCheckOutDate] = useState();
   const [daysOfStay, setDaysOfStay] = useState();
@@ -71,15 +71,16 @@ const RoomDetail = ({ room,roomId }) => {
 const {res} = axios.post(`/api/room/${roomId}`, dataRoom).then((res) => {
 
     console.log("response data🔵🔵🔵--->  ", res.data);
-     stripe.redirectToCheckout({ sessionId: res.data.id });
+    setSessioniDate(res.data);
+    console.log("session-------------> date :::: ", sessioniDate);
+     stripe.redirectToCheckout({ sessionId: res.data.id }); // redirect to stripe buy page
 }).catch((err) => {
     message.error(err.message);
 })
 
 
 
-
-console.log("dataResponse in Client  ", res);
+//console.log("dataResponse in Client  ", res);
 
 // const data = res
 // console.log("data   ☀️  ☀️  ☀️  ☀️  ", data);

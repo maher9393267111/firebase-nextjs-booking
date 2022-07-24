@@ -319,6 +319,11 @@ export const makeBooking = async (data) => {
 }
 
 
+
+
+
+// execludes Dates for this room
+
 export const checkBookedDatesOfRoom = async (roomId) => {
 
 // find booking with room id

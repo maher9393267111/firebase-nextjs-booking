@@ -5,6 +5,7 @@ import Layout from '../components/global/Layout'
 import {RoomsFilter,ALLRooms} from '../utils/db'
 import {useState, useEffect} from 'react'
 import {useRouter} from 'next/router'
+import {useAuth} from '../context'
 import AllRoomsComp  from '../components/home/AllRooms'
 export default function Home() {
 
@@ -13,8 +14,8 @@ const {category,location,guests} = router.query
 console.log("router.query",router.query)
   const [rooms, setRooms] = useState([])
 
-
-
+const {sessioniDate } = useAuth()
+console.log("sessioniDate",sessioniDate)
 
 
 useEffect(() => {
@@ -53,6 +54,8 @@ else {
       </Head>
 
      <div>
+
+{sessioniDate?.id}
 
 
  {rooms?.length > 0 ? 

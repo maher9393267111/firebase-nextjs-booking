@@ -51,6 +51,7 @@ const AuthContext = ({ children }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 const [onotherUser, setOnotherUser] = useState(null);
  const [userownChats, setUserChats] = useState([]);
+ const [sessioniDate, setSessioniDate] = useState(null);
  
 const router = useRouter();
 
@@ -315,6 +316,8 @@ updateDoc(doc(db, "users", auth.currentUser.email), {
     setOnotherUser,
     userChats,
     userownChats,
+    sessioniDate,
+     setSessioniDate
    
    
    
