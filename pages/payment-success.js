@@ -9,50 +9,26 @@ import { message } from 'antd';
 const PaymentSuccess = () => {
 
     const [snapshot] = useCollection(collection(db, "bookings"));
-    const bookings = snapshot?.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+ //   const bookings = snapshot?.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 
 
 
 const router = useRouter();
 
-const { userid ,roomid ,checkInDate, checkOutDate, paymentType,roomName, roomImages} = router.query
+// const { userid ,roomid ,checkInDate, checkOutDate, paymentType,roomName, roomImages} = router.query
 
-console.log(userid,roomid,checkInDate, checkOutDate, paymentType,roomName, roomImages);
+// console.log(userid,roomid,checkInDate, checkOutDate, paymentType,roomName, roomImages);
 
 
 useEffect(() => {
 
-// save data to db then redirect to home page after 2 seconds
 
- const data = {
-    userid,
-    roomid,
-    checkInDate,
-    checkOutDate,
-    paymentType,
-    roomName,
-    roomImages
-    }
+   message.success('Payment Successful')
 
-
-// if user come from payment page only save data to db else redirect to home page and dotn save data to db
-
-console.log(origin.from);
-
-      makeBooking(data)
-      .then((res) => {
-
-
-
-        router.push('/');
-
-
-        message.success("Booking Successful");
-      })
-      .catch((err) => {
-        message.error(err.message);
-      });
-
+    setTimeout(() => {
+        router.push('/')
+    } , 3000)
+    
 
 }, [])
 

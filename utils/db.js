@@ -339,33 +339,58 @@ const roomArr = []
 
   let bookedDates = [];
 
- 
+
+
+
+
+
 
   
 
   roomArr.forEach((booking) => {
+//bookedDates.push(booking.checkInDate);
+//bookedDates.push(booking.checkOutDate);
+//console.log("bookedDates🔪🔪🔪",booking.checkInDate);  // seconds date
 
-bookedDates.push(booking.checkInDate);
-bookedDates.push(booking.checkOutDate);
+bookedDates.push(new Date(booking.checkInDate.seconds*1000));
+bookedDates.push(new Date(booking.checkOutDate.seconds*1000));
 
-//var checkIN = moment(, 'YYYY/MM/DD');
-
-
-
-  })
+ // find dates between checkin and checkout and push to bookedDates
 
   
+ const checkIn = new Date(booking.checkInDate.seconds*1000);
+  const checkOut = new Date(booking.checkOutDate.seconds*1000);
+  const diff = Math.abs(checkOut - checkIn);
+  const diffDays = Math.ceil(diff / (1000 * 60 * 60 * 24));
+  console.log("diffDays",diffDays);
+
+  for (let i = 0; i < diffDays; i++) {  // loop through each day between checkin and checkout
+
+    const d = new Date(checkIn);  // checkin date
+    d.setDate(d.getDate() + i); // add 1 day to  checkin date 
+    bookedDates.push(d);  // push to bookedDates
+  }
+
+
+
+
+
+  }
+
+);
+
+
 
   //console.log("ExecludesDates---->",bookedDates);
 
   const ExecludesDates = bookedDates.map((date) => {
-    //return moment(date.seconds*1000).format('YYYY/MM/DD'); normal date gosterir yerar month day 
-
-   // return moment(date.seconds*1000).utcOffset(timeDiffernece).format('YYYY/MM/DD');   // utc offset ile gosterir
-   return new Date(date.seconds*1000);
+  
+return date
+   
+  // return new Date(date.seconds*1000);
   })
 
-console.log("ExecludesDates---->",ExecludesDates);
+console.log("ExecludesDates🌟🌟🌟---->",ExecludesDates);
 
   return ExecludesDates;
 

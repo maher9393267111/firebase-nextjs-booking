@@ -24,15 +24,19 @@ const RoomDetail = ({ room,roomId }) => {
     setCheckInDate(checkInDate);
     setCheckOutDate(checkOutDate);
 
+
     if (checkInDate && checkOutDate) {
-      // Calclate days of stay
+  
+      console.log('✒✒✒',checkInDate, checkOutDate);
 
       const days = Math.floor(
         (new Date(checkOutDate) - new Date(checkInDate)) / 86400000 + 1
       );
 
+   
+
       setDaysOfStay(days);
-      console.log("days of stay -----< ", days);
+  
 
       dateAvaliability(roomId, checkInDate.toISOString(), checkOutDate.toISOString()).then((res) => {
         console.log("resIN details ", res.data);
@@ -101,9 +105,10 @@ const {res} = axios.post(`/api/room/${roomId}`, dataRoom).then((res) => {
     useEffect(() => {
         checkBookedDatesOfRoom(roomId).then((res) => {
           
-            console.log("resIN-----> details :::: ", res);
-            console.log(new Date())
+            console.log("res EXECLUDE 🌟🌟----> details :::: ", res);
+           // console.log(new Date())
             setExecludedDates(res);
+            console.log("execludedDatesn IN state hooks 🌟🌟🌟 :::: ", execludes);
         })
 
     }, [roomId]);
