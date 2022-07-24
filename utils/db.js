@@ -334,7 +334,7 @@ const roomArr = []
 
   let bookedDates = [];
 
-  const timeDiffernece = Moment().utcOffset() / 60;
+ 
 
   
 

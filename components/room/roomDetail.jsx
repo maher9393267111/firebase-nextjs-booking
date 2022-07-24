@@ -4,8 +4,10 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context";
+import axios from 'axios'
 import { message } from "antd";
 import moment from 'moment';
+import getStripe from '../../getStripe';
 import { dateAvaliability, makeBooking ,checkBookedDatesOfRoom  } from "../../utils/db";
 const RoomDetail = ({ room,roomId }) => {
   const { userinfo } = useAuth();
@@ -33,7 +35,7 @@ const RoomDetail = ({ room,roomId }) => {
       console.log("days of stay -----< ", days);
 
       dateAvaliability(roomId, checkInDate.toISOString(), checkOutDate.toISOString()).then((res) => {
-        console.log("resIN details :::: ", res);
+        console.log("resIN details ", res.data);
         setAvaliable(res);
         console.log('avaliable in details :::: ',avaliable)
       });
@@ -44,17 +46,20 @@ const RoomDetail = ({ room,roomId }) => {
 
   // make booking and payment
 
-  const onBooking = (e) => {
+  const onBooking = async(e) => {
     e.preventDefault();
+    const stripe = await getStripe();
 
-
- const   data = {
-      roomid: roomId,
+ const   dataRoom = {
+      roomId: roomId,
       checkInDate:checkInDate,
       checkOutDate: checkOutDate,
       daysOfStay: daysOfStay,
       userid: userinfo?.id,
-      userinfo: userinfo?.name,
+      userName: userinfo?.name,
+      roomName: room?.name,
+      roomImages: room?.images,
+      
       useremail: userinfo?.email,
       paymentType: "Stripe",
       totalprice: room.price * daysOfStay,
@@ -63,13 +68,32 @@ const RoomDetail = ({ room,roomId }) => {
 //console.log("data :::: ", data);
 
 
-    makeBooking(data)
-      .then((res) => {
-        message.success("Booking Successful");
-      })
-      .catch((err) => {
-        message.error(err.message);
-      });
+const {res} = axios.post(`/api/room/${roomId}`, dataRoom).then((res) => {
+
+    console.log("response data🔵🔵🔵--->  ", res.data);
+     stripe.redirectToCheckout({ sessionId: res.data.id });
+}).catch((err) => {
+    message.error(err.message);
+})
+
+
+
+
+console.log("dataResponse in Client  ", res);
+
+// const data = res
+// console.log("data   ☀️  ☀️  ☀️  ☀️  ", data);
+// stripe.redirectToCheckout({ sessionId: data.id });
+
+
+
+    // makeBooking(data)
+    //   .then((res) => {
+    //     message.success("Booking Successful");
+    //   })
+    //   .catch((err) => {
+    //     message.error(err.message);
+    //   });
   };
 
 
