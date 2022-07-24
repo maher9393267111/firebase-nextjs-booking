@@ -326,8 +326,13 @@ export const makeBooking = async (data) => {
 
 export const checkBookedDatesOfRoom = async (roomId) => {
 
+//console.log("roomId⛲⛲⛲",roomId);
+
 // find booking with room id
-const bookings = await getDocs( collection(db, "bookings") , where("roomid", "==", roomId) );
+const bookings = await getDocs( collection(db, "bookings") , where("room", "==", roomId) );
+
+
+
 
 const roomArr = []
   bookings.forEach((doc) => {
@@ -335,6 +340,18 @@ const roomArr = []
   //  console.log(doc.id, " => ", doc.data());
     roomArr.push({ id: doc.id, ...doc.data() });
   });
+
+
+
+
+ const filterme = roomArr.filter((booking) => {
+
+  return booking.room === roomId;
+ 
+ })
+ 
+
+ console.log("roomBookings-----💡💡💡💡💡",filterme);
 
 
   let bookedDates = [];
@@ -347,7 +364,7 @@ const roomArr = []
 
   
 
-  roomArr.forEach((booking) => {
+  filterme.forEach((booking) => {
 //bookedDates.push(booking.checkInDate);
 //bookedDates.push(booking.checkOutDate);
 //console.log("bookedDates🔪🔪🔪",booking.checkInDate);  // seconds date
